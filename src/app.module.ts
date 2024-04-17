@@ -17,6 +17,7 @@ import { TypeormStore } from 'connect-typeorm';
 import { Session } from './session/session.entity';
 import { DataSource } from 'typeorm';
 import { SessionModule } from './session/session.module';
+import * as cookieParser from 'cookie-parser';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
+        cookieParser(),
         session({
           secret: this.configService.get('SECRET'),
           name: this.configService.get('KEY'),
