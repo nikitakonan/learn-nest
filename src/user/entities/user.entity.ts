@@ -6,16 +6,19 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
+
+  @Column({ unique: true })
+  password: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   resetPasswordToken?: string;
 
-  @Column()
+  @Column({ nullable: true })
   resetPasswordExpires?: Date;
 
   hearts: Store[];
