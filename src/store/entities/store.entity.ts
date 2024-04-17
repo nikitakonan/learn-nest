@@ -22,7 +22,7 @@ export class Store {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   @Index()
   slug: string;
 

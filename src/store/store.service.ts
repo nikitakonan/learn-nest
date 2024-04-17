@@ -4,9 +4,10 @@ import { UpdateStoreDto } from './dto/update-store.dto';
 import { PageStoresDto } from './dto/page-stores.dto';
 import { Store } from './entities/store.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
+import { Repository, In, Like } from 'typeorm';
 import * as slug from 'slug';
 import { Tag } from './entities/tag.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class StoreService {
@@ -17,12 +18,13 @@ export class StoreService {
     private readonly tagRepository: Repository<Tag>,
   ) {}
 
-  async create(createStoreDto: CreateStoreDto): Promise<Store> {
+  async create(createStoreDto: CreateStoreDto, user: User): Promise<Store> {
     const store = new Store();
     store.address = createStoreDto.address;
     store.description = createStoreDto.description;
     store.name = createStoreDto.name;
     store.photo = createStoreDto.photo;
+    store.author = user;
 
     // const testTags = [
     //   'Wifi',
@@ -39,7 +41,7 @@ export class StoreService {
 
     const generatedSlug = slug(createStoreDto.name);
     const storesWithSlug = await this.storeRepository.findBy({
-      slug: generatedSlug,
+      slug: Like(`%${generatedSlug}%`),
     });
     store.slug = storesWithSlug.length
       ? `${generatedSlug}-${storesWithSlug.length + 1}`
@@ -56,7 +58,7 @@ export class StoreService {
       skip,
       take: limit,
       order: { created: 'desc' },
-      relations: ['tags'],
+      relations: ['tags', 'author'],
     });
 
     const pages = Math.ceil(count / limit);
