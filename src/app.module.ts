@@ -18,6 +18,8 @@ import { Session } from './session/session.entity';
 import { DataSource } from 'typeorm';
 import { SessionModule } from './session/session.module';
 import * as cookieParser from 'cookie-parser';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -29,6 +31,9 @@ import * as cookieParser from 'cookie-parser';
     ConfigModule.forRoot({
       envFilePath: ['.env.development.local', '.env'],
       isGlobal: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

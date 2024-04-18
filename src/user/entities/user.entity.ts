@@ -9,16 +9,16 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column({ unique: true, select: false })
+  @Column({ unique: true })
   password: string;
 
   @Column()
   name: string;
 
-  @Column({ nullable: true, select: false })
+  @Column({ nullable: true })
   resetPasswordToken?: string;
 
-  @Column({ nullable: true, select: false })
+  @Column({ nullable: true })
   resetPasswordExpires?: Date;
 
   hearts: Store[];

@@ -18,12 +18,16 @@ export class StoreService {
     private readonly tagRepository: Repository<Tag>,
   ) {}
 
-  async create(createStoreDto: CreateStoreDto, user: User): Promise<Store> {
+  async create(
+    createStoreDto: CreateStoreDto,
+    user: User,
+    photo?: string,
+  ): Promise<Store> {
     const store = new Store();
     store.address = createStoreDto.address;
     store.description = createStoreDto.description;
     store.name = createStoreDto.name;
-    store.photo = createStoreDto.photo;
+    store.photo = photo;
     store.author = user;
 
     // const testTags = [
