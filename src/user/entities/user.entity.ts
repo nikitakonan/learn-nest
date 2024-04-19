@@ -1,5 +1,11 @@
-import { Store } from 'src/store/entities/store.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Store } from '../../store/entities/store.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -21,5 +27,7 @@ export class User {
   @Column({ nullable: true })
   resetPasswordExpires?: Date;
 
+  @ManyToMany(() => Store)
+  @JoinTable()
   hearts: Store[];
 }

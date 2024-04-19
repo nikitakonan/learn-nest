@@ -30,14 +30,6 @@ export class StoreService {
     store.photo = photo;
     store.author = user;
 
-    // const testTags = [
-    //   'Wifi',
-    //   'Open Late',
-    //   'Family Friendly',
-    //   'Vegatarian',
-    //   'Licenced',
-    // ]
-
     const existingTags = await this.tagRepository.findBy({
       name: In(createStoreDto.tags),
     });

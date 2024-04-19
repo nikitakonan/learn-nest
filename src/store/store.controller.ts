@@ -24,7 +24,6 @@ import { Request } from 'express';
 import { User } from 'src/user/entities/user.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
-import { memoryStorage } from 'multer';
 import { PhotoService } from './photo.service';
 
 @Controller('stores')

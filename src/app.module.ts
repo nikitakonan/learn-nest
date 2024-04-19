@@ -8,7 +8,7 @@ import { Store } from './store/entities/store.entity';
 import { UserModule } from './user/user.module';
 import { ReviewModule } from './review/review.module';
 import { User } from './user/entities/user.entity';
-import { Review } from './review/entities/review.entitiy';
+import { Review } from './review/entities/review.entity';
 import { Tag } from './store/entities/tag.entity';
 import { AuthModule } from './auth/auth.module';
 import * as session from 'express-session';
