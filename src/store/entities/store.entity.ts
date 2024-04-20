@@ -12,6 +12,7 @@ import {
   JoinTable,
 } from 'typeorm';
 import { Tag } from './tag.entity';
+import { Location } from './Location';
 
 @Entity()
 @Unique(['id', 'slug'])
@@ -32,11 +33,8 @@ export class Store {
   @CreateDateColumn()
   created: Date;
 
-  @Column()
-  address: string;
-
-  @Column()
-  photo: string;
+  @Column({ nullable: true })
+  photo?: string;
 
   @ManyToMany(() => Tag, { cascade: true })
   @JoinTable()
@@ -45,4 +43,7 @@ export class Store {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'author' })
   author: User;
+
+  @Column(() => Location, { prefix: false })
+  location: Location;
 }

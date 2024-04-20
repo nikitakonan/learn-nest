@@ -8,6 +8,7 @@ import { Repository, In, Like } from 'typeorm';
 import * as slug from 'slug';
 import { Tag } from './entities/tag.entity';
 import { User } from 'src/user/entities/user.entity';
+import { Location } from './entities/Location';
 
 @Injectable()
 export class StoreService {
@@ -24,7 +25,8 @@ export class StoreService {
     photo?: string,
   ): Promise<Store> {
     const store = new Store();
-    store.address = createStoreDto.address;
+    store.location = new Location();
+    store.location.address = createStoreDto.address;
     store.description = createStoreDto.description;
     store.name = createStoreDto.name;
     store.photo = photo;

@@ -3,10 +3,10 @@ import { User } from '../../user/entities/user.entity';
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
@@ -14,12 +14,12 @@ export class Review {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => User)
-  @JoinTable()
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'author' })
   author: User;
 
-  @ManyToMany(() => Store)
-  @JoinTable()
+  @ManyToOne(() => Store)
+  @JoinColumn({ name: 'store' })
   store: Store;
 
   @Column()
